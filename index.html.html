@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOIDMADS | Official Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --product-bg: #ffffff;
+            --text-light: #ffffff;
+            --accent: #333333;
+            --gray: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(10,10,10,1), rgba(10,10,10,0));
+        }
+
+        /* --- Logo Berbentuk Bulat --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 45px; 
+            height: 45px;
+            background-color: var(--product-bg); 
+            border-radius: 50%; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+            border: 1px solid var(--accent);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-circle:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo-circle img {
+            width: 85%; /* Menyesuaikan gambar agar pas di dalam bulatan */
+            height: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        /* --- Layout --- */
+        .product-container {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .product-image-section {
+            flex: 1.2;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--product-bg);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+        }
+
+        .main-img {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .main-img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info-section {
+            flex: 0.8;
+            padding: 5rem 5% 5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- Content --- */
+        .tag {
+            font-size: 0.65rem;
+            color: var(--gray);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .product-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            max-width: 450px;
+            margin-bottom: 2rem;
+        }
+
+        .product-details-list {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+        }
+
+        .product-details-list li {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-details-list li::before {
+            content: "—";
+            margin-right: 12px;
+            color: var(--accent);
+        }
+
+        /* --- Interaction --- */
+        .size-picker {
+            margin-bottom: 2.5rem;
+        }
+
+        .size-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            display: block;
+            letter-spacing: 2px;
+            color: var(--gray);
+        }
+
+        .sizes {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .size-btn {
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: white;
+            padding: 0.9rem 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.75rem;
+            font-family: 'Syncopate', sans-serif;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .buy-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 1.3rem;
+            width: 100%;
+            max-width: 400px;
+            text-transform: uppercase;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.1);
+        }
+
+        .extra-info {
+            margin-top: 3.5rem;
+            border-top: 1px solid var(--accent);
+            padding-top: 2rem;
+            max-width: 400px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 968px) {
+            .product-container { flex-direction: column; }
+            .product-image-section { 
+                position: relative; 
+                top: 0; 
+                height: auto; 
+                padding: 6rem 2rem; 
+            }
+            .product-info-section { 
+                padding: 4rem 10%; 
+                align-items: center; 
+                text-align: center;
+            }
+            .product-title { font-size: 2.4rem; }
+            .product-details-list li { justify-content: center; }
+            .sizes { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="logo.vdms.jpg" alt="V">
+            </div>
+            <div class="logo-text">VOIDMADS</div>
+        </div>
+        <div class="nav-links">VDMS — 2026</div>
+    </nav>
+
+    <main class="product-container">
+        <section class="product-image-section">
+            <img src="voidmads.jpg" alt="VOIDMADS Official Article" class="main-img">
+        </section>
+
+        <section class="product-info-section">
+            <span class="tag">Local Brand / VDMS</span>
+            <h1 class="product-title">VOIDMADS</h1>
+            <div class="price">IDR 130,000</div>
+            
+            <div class="description">
+                <p style="margin-bottom: 1.2rem; letter-spacing: 1px; color: #fff; font-weight: 600; text-transform: uppercase;">
+                    "Konstruksi Abadi Dalam Kesunyian"
+                </p>
+                
+                <p>Sebuah eksplorasi material untuk kamu yang muak dengan yang biasa. VOIDMADS hadir bukan untuk mengikuti tren, tapi untuk menciptakan standar baru dalam lemari pakaianmu.</p>
+                
+                <p style="margin-top: 2rem; color: #fff; font-size: 0.75rem; letter-spacing: 3px; font-weight: 600;">PRODUK DETAILS:</p>
+                <ul class="product-details-list" style="margin-top: 0.5rem;">
+                    <li><strong>Cotton Combed 20s</strong> (Ultra Heavyweight)</li>
+                    <li><strong>Plastisol Screen Print</strong> (High-Density Ink)</li>
+                    <li><strong>Essential Boxy Cut</strong> (Presisi & Kokoh)</li>
+                    <li><strong>Deep Black</strong> (Pure Pigment)</li>
+                </ul>
+
+                <p style="margin-top: 2rem; color: #fff; font-size: 0.75rem; letter-spacing: 3px; font-weight: 600;">THE PACKAGE EXPERIENCE:</p>
+                <ul class="product-details-list" style="margin-top: 0.5rem;">
+                    <li>📦 Signature Packaging Box</li>
+                    <li>🏷️ Identity Hangtag</li>
+                    <li>⚡ Double Exclusive Stickers Pack</li>
+                </ul>
+            </div>
+
+            <div class="size-picker">
+                <span class="size-title">Select Size</span>
+                <div class="sizes">
+                    <button class="size-btn">M</button>
+                    <button class="size-btn">L</button>
+                </div>
+            </div>
+
+            <button id="whatsappLink" class="buy-button">Order via WhatsApp</button>
+
+            <div class="extra-info">
+                <div class="info-item">
+                    <span>Material</span>
+                    <span>Cotton Combed 20's</span>
+                </div>
+                <div class="info-item">
+                    <span>Printing</span>
+                    <span>Plastisol Screen Print</span>
+                </div>
+                <div class="info-item">
+                    <span>Shipping</span>
+                    <span>Seluruh Indonesia</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    const daftarNomor = ["62895610031040", "6285692231956"]; 
+    let ukuranTerpilih = "L"; 
+
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    sizeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sizeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            ukuranTerpilih = btn.innerText;
+        });
+    });
+
+    const orderBtn = document.getElementById('whatsappLink');
+    orderBtn.addEventListener('click', () => {
+        const nomorTerpilih = daftarNomor[Math.floor(Math.random() * daftarNomor.length)];
+        const pesan = `Halo VOIDMADS,\n\nSaya tertarik untuk mengamankan arsip ini.\n\nArtikel: VOIDMADS CORE\nUkuran: ${ukuranTerpilih}\nHarga: IDR 130,000\n\nMohon informasi ketersediaan stoknya. Terima kasih.`;
+        
+        const whatsappUrl = `https://wa.me/${nomorTerpilih}?text=${encodeURIComponent(pesan)}`;
+        window.open(whatsappUrl, '_blank');
+    });
+    </script>
+
+</body>
+</html>
